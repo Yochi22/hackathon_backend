@@ -64,7 +64,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Ingrese el nombre del estudiante (o 'salir' para terminar):");
+            System.out.println("Ingrese el nombre del estudiante (o 'salir' para terminar y ver promedio de notas):");
             String nombre = scanner.nextLine();
 
             if (nombre.equalsIgnoreCase("salir")) {
@@ -78,7 +78,8 @@ public class Main {
 
             boolean continuar = true;
             while (continuar) {
-                System.out.println("Ingrese una nota (o -1 para terminar):");
+                //se cambió la impresión en consola, para mayor claridad al usuario
+                System.out.println("Ingrese una nota (o -1 si ya ingresaste todas las notas):");
                 double nota = scanner.nextDouble();
                 /* La falta de este Scanner.nextLine(); Hace que al retornar a la toma del siguiente estudiante
                 * no se pueda ingresar el nombre y cree un bucle infinito */
@@ -94,7 +95,13 @@ public class Main {
         }
 
         scanner.close();
-        universidad.imprimirPromedios();
+
+        //Agregamos este condicional para que si no se ingresan estudiantes con sus notas, no calcule el promedio.
+        if(universidad.estudiantes.size() != 0){
+         universidad.imprimirPromedios();
+        }else {
+            System.out.println("No ingresaste estudiantes ni notas, reinicia el proceso");
+        }
     }
 }
 
